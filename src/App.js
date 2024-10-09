@@ -7,7 +7,6 @@ import Home from './components/Home'
 import PopularRoute from './components/PopularRoute'
 import MovieItemDetailRoute from './components/MovieItemDetailRoute'
 import NotFound from './components/NotFound'
-import TrendingMovies from './components/TrendingMovies'
 
 import './App.css'
 
