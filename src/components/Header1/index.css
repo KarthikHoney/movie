@@ -1,0 +1,36 @@
+.profileIcon {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+#imgAndNav {
+  display: flex;
+  margin-left: 10%;
+}
+.sicon {
+  margin-right: 20px;
+  color: white;
+}
+
+#searchAndProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10%;
+}
+.head2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #131313;
+  opacity: 20%;
+  height: 20%;
+  
+}
+.Header1homePara {
+  margin-left: 10px;
+  color: white;
+}

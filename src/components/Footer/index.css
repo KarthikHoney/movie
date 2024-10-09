@@ -1,0 +1,22 @@
+.googleIcon {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: white;
+  font-size: 1rem;
+}
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.footerPara {
+  font-size: 1rem;
+  color: white;
+}
+.fontIcons{
+  margin-top: 3.5%;
+  
+}
