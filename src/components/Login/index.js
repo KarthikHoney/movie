@@ -11,7 +11,7 @@ class Login extends Component {
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
-    Cookies.set('jwt_token', jwtToken, {path: '/'})
+    Cookies.set('jwt_Token', jwtToken, {path: '/'})
     history.replace('/')
   }
 
@@ -28,20 +28,20 @@ class Login extends Component {
   }
 
   LoginFetch = async event => {
-    event.preventDefault()
+    event.preventDefault() // This ensures the form doesn't reload the page
+
     const {username, password} = this.state
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
-      headers: {
-        'Content-Type': 'application/json',
-      },
     }
 
     const response = await fetch(url, options)
     const data = await response.json()
+    console.log(data)
+
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
@@ -102,8 +102,8 @@ class Login extends Component {
             {this.renderUsername()}
             {this.renderPassword()}
             <button type="submit">Login</button>
-            {showErrorMsg && <p style={{color: 'red'}}>{errorMsg}</p>}
           </form>
+          {showErrorMsg && <p style={{color: 'red'}}>{errorMsg}</p>}
         </section>
       </div>
     )
