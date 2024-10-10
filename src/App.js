@@ -10,23 +10,23 @@ import NotFound from './components/NotFound'
 
 import './App.css'
 
-// const ProtectedRoute = ({component: Component, ...rest}) => {
-//   const jwtToken = Cookies.get('jwt_token')
+const ProtectedRoute = ({component: Component, ...rest}) => {
+  const jwtToken = Cookies.get('jwt_token')
 
-//   return (
-//     <Route
-//       {...rest}
-//       render={props =>
-//         jwtToken ? <Component {...props} /> : <Redirect to="/login" />
-//       }
-//     />
-//   )
-// }
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        jwtToken ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  )
+}
 
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <ProtectedRoute exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/popular" component={PopularRoute} />
       <Route path="/moviedetail" component={MovieItemDetailRoute} />

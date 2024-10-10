@@ -1,9 +1,7 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
-
 import Header from '../Header'
-
 import './index.css'
 
 class Login extends Component {
@@ -11,7 +9,9 @@ class Login extends Component {
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
-    Cookies.set('jwt_Token', jwtToken, {path: '/'})
+
+    Cookies.set('jwt_token', jwtToken, {expires: 50, path: '/'})
+    console.log('jwtToken set:', jwtToken)
     history.replace('/')
   }
 
@@ -28,7 +28,7 @@ class Login extends Component {
   }
 
   LoginFetch = async event => {
-    event.preventDefault() // This ensures the form doesn't reload the page
+    event.preventDefault()
 
     const {username, password} = this.state
     const userDetails = {username, password}
@@ -38,14 +38,18 @@ class Login extends Component {
       body: JSON.stringify(userDetails),
     }
 
-    const response = await fetch(url, options)
-    const data = await response.json()
-    console.log(data)
+    try {
+      const response = await fetch(url, options)
+      const data = await response.json()
+      console.log(data)
 
-    if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
-    } else {
-      this.onSubmitFailure(data.error_msg)
+      if (response.ok) {
+        this.onSubmitSuccess(data.jwt_token)
+      } else {
+        this.onSubmitFailure(data.error_msg)
+      }
+    } catch (error) {
+      this.onSubmitFailure('Something went wrong. Please try again.')
     }
   }
 
@@ -87,11 +91,11 @@ class Login extends Component {
 
   render() {
     const {showErrorMsg, errorMsg} = this.state
-    const jwtToken = Cookies.get('jwt_token') // Check for token
+    // const jwtToken = Cookies.get('jwt_token') // Check for token in cookies
 
-    if (jwtToken) {
-      return <Redirect to="/" /> // Redirect to home if already logged in
-    }
+    // if (jwtToken) {
+    //   return <Redirect to="/" /> // Redirect to home if already logged in
+    // }
 
     return (
       <div className="mainContainer">

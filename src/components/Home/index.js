@@ -10,16 +10,17 @@ const Home = props => {
   const [errors, setError] = useState('')
 
   const onClickLogout = () => {
-    Cookies.remove('jwt_Token') // Ensure this matches the key used to set the token
+    Cookies.remove('jwt_token')
     const {history} = props
     history.replace('/login')
+    console.log(Cookies.remove('jwt_token'))
   }
 
   useEffect(() => {
     const fetchTrending = async () => {
       const url = 'https://apis.ccbp.in/movies-app/trending-movies'
-      const jwtToken = Cookies.get('jwt_Token')
-      console.log('JWT Token:', jwtToken)
+      const jwtToken = Cookies.get('jwt_token')
+      console.log('JWT_Token:', jwtToken)
       if (!jwtToken) {
         console.error('JWT Token is undefined. User might not be logged in.')
         return
@@ -46,7 +47,7 @@ const Home = props => {
       }
     }
 
-    fetchTrending() // Fetch trending movies when the component mounts
+    fetchTrending()
   }, [])
 
   return (
@@ -56,17 +57,16 @@ const Home = props => {
         Logout
       </button>
       <div>
-        {loading && <p>Loading...</p>} {/* Display a loading message */}
+        {loading && <p>Loading...</p>}
         {errors && <p style={{color: 'red'}}>{errors}</p>}{' '}
-        {/* Display an error message */}
         {trendingMovies.length > 0 ? (
           <ul>
             {trendingMovies.map(movie => (
-              <li key={movie.id}>{movie.title}</li> // Render movie titles in a list
+              <li key={movie.id}>{movie.title}</li>
             ))}
           </ul>
         ) : (
-          !loading && <p>No movies to display.</p> // Show message if no movies are fetched
+          !loading && <p>No movies to display.</p>
         )}
       </div>
       <Footer />
